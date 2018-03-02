@@ -1,0 +1,42 @@
+<html>
+   <title>SVG Interactivity</title>
+   <body>
+
+      <svg width="600" height="600">
+         <script type="text/JavaScript">
+            <![CDATA[
+            var prevX = -10;
+            var prevY = -10;
+            function drawcircle(e) {
+            var toDraw = document.getElementById('g');
+            toDraw.innerHTML += "<circle cx=\"" + e.offsetX +"\" cy =\""+ e.offsetY +"\" r=\"10\" ></circle>";
+            //alert(toDraw.innerHTML);
+            if (prevX != -10) {
+            toDraw.innerHTML += '<line x1="' + prevX + '" y1="' + prevY + '" x2="' + e.offsetX + '"y2="' + e.offsetY + '" stroke=\"black\"></line>';
+            }
+            prevX = e.offsetX;
+            prevY = e.offsetY;
+            }
+            function cl() {
+                //alert('clear');
+                document.getElementById('g').innerHTML = '<rect id="rect1" x="0" y="0" width="400" height="400" stroke="blue" stroke-width="3" fill="white" onClick="drawcircle(event)"></rect><text x="10" y="430"  onClick="drawcircle(event); cl()">clear</text>'
+                prevX = -10;
+            }
+            ]]>
+         </script>
+
+         <g>
+             <g id="g">
+
+                 <rect id="rect1" x="0" y="0" width="400" height="400"
+                     stroke="blue" stroke-width="3" fill="white"
+                     onClick="drawcircle(event)">
+                 </rect>
+                 <text x="10" y="430"  onClick="cl()">clear</text>
+             </g>
+
+      </svg>
+
+   </body>
+
+</html>
